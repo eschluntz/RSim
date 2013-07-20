@@ -1,0 +1,86 @@
+Robotics Simulator
+by Erik schluntz
+
+////////////////////////////////////// Goal
+
+    create a program that will accurately simulate a robotic system
+    so that I can play around with different robotic behaviors without
+    buying any hardware or building anything.
+
+    The simulation will include:
+    > A world with laws of physics and obstacles which the robot will
+        interact with.
+
+    > a robot, which will have scripts that control it
+
+    > sensors, which the robot calls in order to get data about the
+        world
+
+    > actuators, which the robot calls to move itself
+
+
+////////////////////////////////////// class structure
+
+    > world (probably PApplet)
+        holds everything else
+        2D for now (turn gravity on/off for top down vs vertical)
+    > obstacle
+        has a shape and position. renders, and can be detected by
+        sensors
+    > robot
+        has physical characteristics, such as mass, rotational inertia,
+        position, speed, and rotational speed. updates based on forces
+        and torques upon it.
+
+        also has sensors and actuators as members
+
+        has a control function or something which is where I put the
+        behavior code I want to test.
+
+        This code calls sensors and actuators.
+
+    > sensor
+        "mounted" to a robot. Has an offset position and angle from
+        the robot, and when called, takes the robots absolute position,
+        its relation to the robot, and the obstacles in the world to
+        return its desired value.
+
+        SENSORS WILL HAVE NOISE.
+
+    > actuator
+        also mounted to the robot with offset position and angle. when
+        called, it will noisily exert a force, and then call functions
+        of the robot to apply the calculated force and torque.
+
+////////////////////////////////////// done
+    > robots exist
+    > robots update, and render, and hold sensors and motors
+    > the abstract sensor exists
+    > perfect GPS exists
+    > abstract motors exist
+    > perfect thruster exists, updates, and renders
+    > physics for kinematics and rotation is correct
+    > make behavior object
+        > different behaviors are subclasses
+        > made behavior PIDHover
+        > made QuadFollow: follows the mouse button
+            > greatly improved stability. problem was that upwards thrust was not leaving any room for
+                control thrusters
+    > create obstacles to be sensed
+        > line detection works correctly
+    > create range finder
+
+////////////////////////////////////// todo
+
+    > make sensors noisy
+        > GPS
+        > gyro
+        > range finder
+    > make motors noisy
+    > create other sensors
+        > accelerometer
+        > proximinity sensor
+
+    > have obst.near return closest point for proximity sensor
+    > make 3D? D:
+
